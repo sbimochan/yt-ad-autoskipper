@@ -12,9 +12,18 @@
     if (window.location.pathname !== '/watch') {
       return;
     }
-    var skipButton = document.querySelector('button.videoAdUiSkipButton');
+    var isMuted = false;
+    var muteButton = document.querySelector('button.ytp-mute-button');
+    var skipButton = document.querySelector('button.ytp-ad-skip-button');
     if (skipButton) {
       eventFire(skipButton, 'click');
+      if (isMuted === false) {
+        eventFire(muteButton, 'click');
+        isMuted = true;
+      }
+    } else {
+      // If video was skipped, unmute it
+      isMuted = false;
     }
   }, 2000);
 
